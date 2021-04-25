@@ -12,17 +12,17 @@
         
     </head>
     <body>
-        <h1>Blog Name</h1>
-        <div class='posts'>
-            @foreach ($posts as $post)
-                <div class='post'>
-                    <a href="/posts/{{$post->id}}"><h2 class='title'>{{ $post->title }}</h2></a>
-                    <p class='body'>{{ $post->body }}</p>
-                </div>
-            @endforeach
+        <h1 class="title">
+            {{ $post->title }}
+        </h1>
+        <div class="content">
+            <div class="content__post">
+                <h3>本文</h3>
+                <p>{{ $post->body }}</p>    
+            </div>
         </div>
-        <div class='paginate'>
-            {{ $posts->links() }}
+        <div class="footer">
+            <a href="/">戻る</a>
         </div>
     </body>
 </html>
