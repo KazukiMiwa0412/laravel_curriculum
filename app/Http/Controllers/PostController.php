@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Post;
 use App\Http\Requests\PostRequest;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -46,4 +48,20 @@ class PostController extends Controller
         $post->delete();
         return redirect('/');
     }
+    
+    public function search(Request $request)
+    {
+        dd($request->all());
+        /*
+        $posts=Post::where('title','like',"%$request->search%")
+                ->orWhere('body','like',"%$request->search%")
+                ->orderBy('updated_at', 'DESC')
+                ->paginate(5);
+        $search_result = $request->search.'の件数は'.$posts->total().'件です。';
+        return view('index')->with(['posts' => $posts,'search_result'=>$search_result,'search_query'=>$request->search]);  
+        */
+        
+    }
+    
+    
 }
