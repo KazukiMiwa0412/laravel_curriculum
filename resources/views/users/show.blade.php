@@ -109,7 +109,7 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <body>
-        <h1 class="page_title">サンプルブログ</h1>
+        <h1 class="page_title">{{  $user->name }}の投稿</h1>
         <header>
             <div class="hamburger-menu">
                 <!-- チェックボックス -->
@@ -143,7 +143,7 @@
             @foreach ($posts as $post)
                 <div class='post'>
                     <h3><a href="/posts/{{ $post->id }}">{{ $post->title }}</a>
-                    <a href="{{ route('users.show' , $post->user_name) }}">{{ $post->user_name }}</a>
+                    <a href="{{ route('users.show',$post->user_name)}}">{{ $post->user_name }}</a>
                     <p class='body'>{{ $post->body }}</p>
                 </div>
             @endforeach
