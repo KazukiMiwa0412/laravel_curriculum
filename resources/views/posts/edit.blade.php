@@ -1,3 +1,6 @@
+@extends('layouts.layout')
+@section('child')
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -5,10 +8,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Laravel</title>
-
+        <style>
+            body {
+                background-image: url("/storage/sample_pic.jpg");
+                background-size:cover;
+            }
+        </style>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-
+        <
         
     </head>
     <body>
@@ -29,3 +37,4 @@
         <div class="back">[<a href="/posts/{{$post->id}}">back</a>]</div>
     </body>
 </html>
+@endsection

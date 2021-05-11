@@ -5,15 +5,27 @@
         <title>Blog</title>
         
         <style>
-            /*
+            
             body {
-                background-image: url("/blog/public/storage/ウユニ塩湖.jpg");
+                background-image: url("/storage/sample_pic.jpg");
+                background-size:cover;
             }
-            */
+            .login_user{
+                color:white;
+                font-size:30px;
+            }
+            .post{
+                border:solid;
+                margin:10px 0;
+                width:40%;
+                
+            }
             .post .body{
                 background-color: pink;
                 border: solid;
-                width:35%;
+                width:90%;
+                margin-right: auto;
+                margin-left: auto;
             }
             
             .page_title{
@@ -104,13 +116,14 @@
             #menu-btn-check:checked ~ .menu-content {
                 left: 70%;/*メニューを画面内へ*/
             }
+            
         </style>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <body>
-        <h1 class="page_title">サンプルブログ</h1>
         <header>
+            <h1 class="page_title">サンプルブログ</h1>
             <div class="hamburger-menu">
                 <!-- チェックボックス -->
                 <input type="checkbox" id="menu-btn-check">
@@ -118,6 +131,9 @@
                 <label for="menu-btn-check" class="menu-btn"><span></span></label>
                 <div class="menu-content">
                     <ul>
+                        <li>
+                            <h2 class="login_user">{{ Auth::user()->name }}</h2>
+                        </li>
                         <li>
                             <a href="/posts/create">記事作成</a>
                         </li>
@@ -127,33 +143,23 @@
                         <li>
                             <a href="/login">ログイン</a>
                         </li>
+                        <li>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                    {{ __('ログアウト') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
         </header>
-        <!-- 検索フォーム -->
-        <form action="{{url('/posts/search')}}" method="get">
-            <input type="text" name="search" placeholder="入力" value="">
-            <button type="submit">検索</button>
-        </form>
-        @isset($search_result)
-            <h5>{{$search_result}}</h5>
-        @endisset
-        <div class='posts'>
-            @foreach ($posts as $post)
-                <div class='post'>
-                    <h3><a href="/posts/{{ $post->id }}">{{ $post->title }}</a>
-                    <a href="{{ route('users.show' , $post->user_name) }}">{{ $post->user_name }}</a>
-                    <p class='body'>{{ $post->body }}</p>
-                </div>
-            @endforeach
-        </div>
-        <div class='paginate'>
-            @if(isset($search_query))
-                {{ $posts->appends(['search' =>$search_query])->links('vendor.pagination.sample-pagination') }}
-            @else
-                {{ $posts->links('vendor.pagination.sample-pagination') }}
-            @endif
-        </div>
+        @yield('child')
     </body>
 </html>

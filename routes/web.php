@@ -12,28 +12,28 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/posts/search', 'PostController@search')->name('search');
+Route::get('/posts/search', 'PostController@search')->name('posts.search');
 Route::get('/login', function(){
     return view('login');
 });
-Route::get('/index', 'PostController@index')->name('index');
-Route::get('/posts/create', 'PostController@create')->name('create');
-Route::get('/posts/{post}', 'PostController@show')->name('show');
-Route::get('/posts/{post}/edit', 'PostController@edit')->name('edit');
+Route::get('/index', 'PostController@index')->name('posts.index');
+Route::get('/posts/create', 'PostController@create')->name('posts.create');
+Route::get('/posts/{post}', 'PostController@show')->name('posts.show');
+Route::get('/posts/{post}/edit', 'PostController@edit')->name('posts.edit');
 
 
 
 
-Route::post('/posts', 'PostController@store')->name('store');
+Route::post('/posts', 'PostController@store')->name('posts.store');
 
-Route::put('/posts/{post}', 'PostController@update')->name('update');
+Route::put('/posts/{post}', 'PostController@update')->name('posts.update');
 
-Route::delete('/posts/{post}', 'PostController@delete')->name('delete');
+Route::delete('/posts/{post}', 'PostController@delete')->name('posts.delete');
 
 
 Auth::routes();
-
+Route::get('/users/search', 'UserController@search')->name('user.search');
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/users/{user_name}','UserController@show')->name('users.show');
+Route::get('/users/{user}','UserController@show')->name('users.show');
 Route::resource('/users','UserController', ['except' => ['show']]);
