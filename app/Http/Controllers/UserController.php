@@ -90,15 +90,24 @@ class UserController extends Controller
     
     public function search(Request $request)
     {
+        $request->validate([
+            'search'=>'required'
+        ]);
+       if($request->orderby=='desc'){
+            $posts=Post::where('title','like',"%$request->search%")
+                    ->orWhere('body','like',"%$request->search%")
+                    ->orderBy('updated_at', 'DESC')
+                    ->paginate(5);
+        }elseif($request->orderby=='asc'){
+            $posts=Post::where('title','like',"%$request->search%")
+                    ->orWhere('body','like',"%$request->search%")
+                    ->orderBy('updated_at', 'ASC')
+                    ->paginate(5);
+        }
         
-        $posts=Post::where('title','like',"%$request->search%")
-                ->orWhere('body','like',"%$request->search%")
-                ->Where('user_name',"%$request->user_name%")
-                ->orderBy('updated_at', 'DESC')
-                ->paginate(5);
         $search_result = $request->search.'の件数は'.$posts->total().'件です。';
         $user_name= $request->user_name;
-        return view('posts.index')->with(['posts' => $posts,'search_result'=>$search_result,'search_query'=>$request->search,'user_name'=>$user_name]);  
+        return view('posts.index')->with(['posts' => $posts,'search_result'=>$search_result,'search_query'=>$request->search,'user_name'=>$user_name,'search_orderby'=>$request->orderby]);  
        
         
     }

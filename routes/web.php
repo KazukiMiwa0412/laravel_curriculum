@@ -32,7 +32,7 @@ Route::delete('/posts/{post}', 'PostController@delete')->name('posts.delete');
 
 
 Auth::routes();
-Route::get('/users/search', 'UserController@search')->name('user.search');
+Route::get('/users/search', 'UserController@search')->name('users.search');
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/users/{user}','UserController@show')->name('users.show');

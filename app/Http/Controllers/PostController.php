@@ -12,7 +12,6 @@ class PostController extends Controller
 {
     public function index(Post $post)
     {
-        
         return view('posts.index')->with(['posts' => $post->getPaginateByLimit()]);  
     }
     
@@ -57,13 +56,24 @@ class PostController extends Controller
     
     public function search(Request $request)
     {
+        $request->validate([
+            'search'=>'required'
+        ]);
         
-        $posts=Post::where('title','like',"%$request->search%")
-                ->orWhere('body','like',"%$request->search%")
-                ->orderBy('updated_at', 'DESC')
-                ->paginate(5);
+        if($request->orderby=='desc'){
+            $posts=Post::where('title','like',"%$request->search%")
+                    ->orWhere('body','like',"%$request->search%")
+                    ->orderBy('updated_at', 'DESC')
+                    ->paginate(5);
+        }elseif($request->orderby=='asc'){
+            $posts=Post::where('title','like',"%$request->search%")
+                    ->orWhere('body','like',"%$request->search%")
+                    ->orderBy('updated_at', 'ASC')
+                    ->paginate(5);
+        }
+        
         $search_result = $request->search.'の件数は'.$posts->total().'件です。';
-        return view('posts.index')->with(['posts' => $posts,'search_result'=>$search_result,'search_query'=>$request->search]);  
+        return view('posts.index')->with(['posts' => $posts,'search_result'=>$search_result,'search_query'=>$request->search,'search_orderby'=>$request->orderby]);  
        
         
     }

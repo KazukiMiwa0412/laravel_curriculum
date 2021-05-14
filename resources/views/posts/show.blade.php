@@ -11,16 +11,13 @@
             .content__post .body{
                 background-color: pink;
                 border: solid;
-                width:20%;
-            }
-            
-            body {
-                background-image: url("/storage/sample_pic.jpg");
-                background-size:cover;
+                margin:0 50px 0;
+                
             }
             .contents{
-                margin:50px;
+                background-color:white;
             }
+            
             .title{
                 margin-bottom:50px;
             }
@@ -28,18 +25,16 @@
                 margin-bottom:50px;
             }
             .content{
-                margin-bottom:50px;
+                margin:0px 50px 50px;
             }
             button{
                 width:100px;
                 text-align:center;
             }
             .edit{
-                margin:50px 0;
+                margin:50px 200px 0;
                 font-size:20px;
                 background-color:#EEEEEE;
-                width:100px;
-                text-align:center;
                 border:solid;
                 border-width:thin;
             }
@@ -77,7 +72,7 @@
             @endif
             
             <div class="footer">
-                <a href="/index">戻る</a>
+                <a href="/index">[戻る]</a>
             </div>
             <script>
                 function deletePost(e){

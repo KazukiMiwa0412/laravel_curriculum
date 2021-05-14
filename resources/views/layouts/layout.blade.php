@@ -5,27 +5,35 @@
         <title>Blog</title>
         
         <style>
-            
             body {
                 background-image: url("/storage/sample_pic.jpg");
                 background-size:cover;
             }
+            
+            .contents{
+                text-align:center;
+                width:500px;
+                margin: auto;
+            }
+            
+            
+            
             .login_user{
                 color:white;
                 font-size:30px;
             }
             .post{
                 border:solid;
-                margin:10px 0;
-                width:40%;
+                margin:10px 50px 0;
+                background-color:white;
+               
                 
             }
             .post .body{
                 background-color: pink;
                 border: solid;
-                width:90%;
-                margin-right: auto;
-                margin-left: auto;
+                margin-right: 50px;
+                margin-left: 50px;
             }
             
             .page_title{
@@ -135,7 +143,7 @@
                             <h2 class="login_user">{{ Auth::user()->name }}</h2>
                         </li>
                         <li>
-                            <a href="/posts/create">記事作成</a>
+                            <a href="{{ route('posts.create') }}">記事作成</a>
                         </li>
                         <li>
                             <a href="/index">TOPへ</a>
@@ -160,6 +168,8 @@
                 </div>
             </div>
         </header>
-        @yield('child')
+        <div class="contents">
+            @yield('child')
+        </div>
     </body>
 </html>

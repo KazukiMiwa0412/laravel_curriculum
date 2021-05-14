@@ -8,12 +8,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Laravel</title>
-        <style>
-            body {
-                background-image: url("/storage/sample_pic.jpg");
-                background-size:cover;
-            }
-        </style>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
         <
@@ -21,7 +15,7 @@
     </head>
     <body>
         <h1>編集画面</h1>
-        <form action="/posts/{{$post->id}}" method="POST">
+        <form action="{{ route('posts.show' , $post->id) }}" method="POST">
             @csrf
             @method('PUT')
             <div class="title">
@@ -34,7 +28,7 @@
             </div>
             <input type="submit" value="更新"/>
         </form>
-        <div class="back">[<a href="/posts/{{$post->id}}">back</a>]</div>
+        <div class="back">[<a href="{{ route('posts.show' , $post->id) }}">back</a>]</div>
     </body>
 </html>
 @endsection

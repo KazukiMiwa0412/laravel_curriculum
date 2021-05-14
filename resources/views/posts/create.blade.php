@@ -21,7 +21,7 @@
     </head>
     <body>
         <h1>サンプルブログ</h1>
-        <form action="/posts" method="POST">
+        <form action="{{ route("posts.store") }}" method="POST">
             @csrf
             <div class="title">
                 <h2>Title</h2>
@@ -38,7 +38,7 @@
             <input type="hidden" name="post[user_id]" value="{{ Auth::user()->id }}">
             <input type="submit" value="保存"/>
         </form>
-        <div class="back">[<a href="/index">back</a>]</div>
+        <div class="back">[<a href="{{ route("posts.index") }}">back</a>]</div>
     </body>
 </html>
 @endsection
