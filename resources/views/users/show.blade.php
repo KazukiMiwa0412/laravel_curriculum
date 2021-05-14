@@ -12,13 +12,13 @@
     </head>
     <body>
         <h2>
-            {{ $user->posts[0]->user_name }}の投稿
+            {{ $user->items()[0]->user_name }}の投稿
         </h2>
         <!-- 検索フォーム -->
         <form action="{{ route('users.search') }}" method="get">
             <input type="text" name="search" placeholder="入力" value="">
-            <input type="hidden" name="user_name" value="{{ $user->posts[0]->user_name }}">
-            <input type="hidden" name="user_data" value="{{ $user }}">
+            <input type="hidden" name="user_name" value="{{ $user->items()[0]->user_name }}">
+            
             <button type="submit">検索</button>
             <select name="orderby">
                 <option value="desc">desc</option>
@@ -34,7 +34,7 @@
             <h5>{{$search_result}}</h5>
         @endisset
         <div class='posts'>
-            @foreach ($user->posts as $post)
+            @foreach ($user->items() as $post)
                 <div class='post'>
                     <h3><a href="{{ route('posts.show' , $post->id) }}">{{ $post->title }}</a></h3>
                     <a href="{{ route('users.show',$post->user_name)}}">{{ $post->user_name }}</a>
@@ -42,6 +42,7 @@
                 </div>
             @endforeach
         </div>
+        {{ $user->links('vendor.pagination.sample-pagination') }}
     </body>
 </html>
 @endsection

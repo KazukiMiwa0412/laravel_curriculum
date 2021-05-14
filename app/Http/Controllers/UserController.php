@@ -49,8 +49,9 @@ class UserController extends Controller
     public function show(User $user)
     {
         
-        
-        $user->load('posts');
+        //$user->load('posts');
+        $user=$user->posts()->paginate(5);
+        //dd($user->items()[0]);
         return view('users.show')->with(['user' => $user]);
     }
 
